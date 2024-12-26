@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Календарь мероприятий</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="manifest" href="manifest.json"> <!-- Добавьте эту строку -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Добавить мероприятие</h1>
+        <form id="event-form">
+            <label for="event-name">Название мероприятия:</label>
+            <input type="text" id="event-name" name="event-name" required>
+            <label for="event-date">Дата мероприятия:</label>
+            <input type="date" id="event-date" name="event-date" required>
+            <label for="event-time">Время мероприятия:</label>
+            <input type="time" id="event-time" name="event-time">
+            <label for="event-description">Описание мероприятия:</label>
+            <textarea id="event-description" name="event-description"></textarea>
+            <button type="submit">Добавить</button>
+        </form>
+        <h2>Мероприятия</h2>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Поиск мероприятий по названию">
+            <button id="search-button">Поиск</button>
+        </div>
+        <div class="tabs">
+            <div class="tab">
+                <button class="tablinks" onclick="toggleTab(event, 'past')">
+                    <span>Прошедшие мероприятия</span>
+                    <span class="arrow">&#9660;</span>
+                </button>
+                <div id="past" class="tabcontent">
+                    <h3>Прошедшие мероприятия</h3>
+                    <div id="past-events"></div>
+                </div>
+            </div>
+            <div class="tab">
+                <button class="tablinks" onclick="toggleTab(event, 'future')">
+                    <span>Предстоящие мероприятия</span>
+                    <span class="arrow">&#9660;</span>
+                </button>
+                <div id="future" class="tabcontent">
+                    <h3>Предстоящие мероприятия</h3>
+                    <div id="future-events"></div>
+                </div>
+            </div>
+        </div>
+        <div id='calendar'></div>
+    </div>
+
+    <!-- Модальное окно для просмотра мероприятия -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="eventTitle"></h2>
+            <div class="event-description-container">
+                <p id="eventDescription"></p>
+            </div>
+            <p id="eventDateTime"></p>
+            <button id="deleteEventButton" class="delete-button">Удалить мероприятие</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно для результатов поиска -->
+    <div id="searchModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Результаты поиска</h2>
+            <div id="searchResults"></div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для подтверждения удаления -->
+    <div id="confirmDeleteModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Подтверждение удаления</h2>
+            <p>Действительно ли вы хотите удалить мероприятие?</p>
+            <button id="confirmDeleteButton" class="confirm-button">Да</button>
+            <button id="cancelDeleteButton" class="cancel-button">Нет</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
